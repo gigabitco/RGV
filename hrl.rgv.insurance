@@ -1,0 +1,75 @@
+## RGV Insurance SRX Config
+#
+set interfaces ge-0/0/0 description CORE:HRLNTXMT01R:ae0:162.249.33.3:
+set interfaces ge-0/0/0 mtu 2000
+set interfaces ge-0/0/0 unit 0 family inet address 162.249.33.119/31
+set interfaces ge-0/0/0 unit 0 family iso
+set interfaces ge-0/0/0 unit 0 family mpls
+set interfaces ge-0/0/1 description "DIA:RGV INSURANCE:32/L3XX/000916/GC:162.249.32.52/30"
+set interfaces ge-0/0/1 traps
+set interfaces ge-0/0/1 mtu 2000
+set interfaces ge-0/0/1 encapsulation ethernet-vpls
+set interfaces ge-0/0/1 unit 0
+set interfaces fe-0/0/2 description "VOICE:RGV INSURANCE:28/L2VX/000114/GC:"
+set interfaces fe-0/0/2 encapsulation ethernet-vpls
+set interfaces fe-0/0/2 unit 0
+set interfaces lo0 description "RGV INSURANCE - JUNIPER SRX210"
+set interfaces lo0 unit 0 family inet filter input Protect-RE
+set interfaces lo0 unit 0 family inet address 127.0.0.1/32
+set interfaces lo0 unit 0 family inet address 162.249.33.12/32
+#
+set routing-instances GVOICE.SIP instance-type vpls
+set routing-instances GVOICE.SIP interface fe-0/0/2.0
+set routing-instances GVOICE.SIP vrf-target target:62917:9996
+set routing-instances GVOICE.SIP vrf-target import target:9996:1
+set routing-instances GVOICE.SIP vrf-target export target:9996:2
+set routing-instances GVOICE.SIP protocols vpls no-tunnel-services
+set routing-instances GVOICE.SIP protocols vpls site hrl.rgv.insurance site-identifier 213
+set routing-instances RGV.INSURANCE.DIA description "VPLS Transport to Backbone:"
+set routing-instances RGV.INSURANCE.DIA instance-type vpls
+set routing-instances RGV.INSURANCE.DIA vlan-id none
+set routing-instances RGV.INSURANCE.DIA interface ge-0/0/1.0
+set routing-instances RGV.INSURANCE.DIA vrf-target target:62917:3005
+set routing-instances RGV.INSURANCE.DIA protocols vpls no-tunnel-services
+set routing-instances RGV.INSURANCE.DIA protocols vpls site hrl.rgv.insurance site-identifier 3005
+set routing-options router-id 162.249.33.12
+set routing-options route-distinguisher-id 162.249.33.12
+set routing-options autonomous-system 62917
+
+set protocols ldp apply-groups LDP_INTERFACE
+set protocols ldp interface ge-0/0/0.0
+set protocols ldp interface lo0.0
+set protocols ldp neighbor 162.249.33.3
+set protocols mpls interface ge-0/0/0.0
+set protocols mpls interface lo0.0
+
+
+set protocols mpls interface ge-0/0/0.0
+set protocols mpls interface lo0.0
+set protocols bgp traceoptions file bgp-state
+set protocols bgp traceoptions file size 1m
+set protocols bgp traceoptions file files 10
+set protocols bgp traceoptions flag open
+set protocols bgp traceoptions flag state
+set protocols bgp group ibgpv4 type internal
+set protocols bgp group ibgpv4 description "IBGP connection to Backbone"
+set protocols bgp group ibgpv4 local-address 162.249.33.12
+set protocols bgp group ibgpv4 family inet unicast
+set protocols bgp group ibgpv4 family inet-vpn unicast
+set protocols bgp group ibgpv4 family l2vpn signaling
+set protocols bgp group ibgpv4 export RGV-INSURANCE-EXPORT
+set protocols bgp group ibgpv4 peer-as 62917
+set protocols bgp group ibgpv4 neighbor 162.249.33.3 description HRLNTXMT01R
+set protocols isis apply-groups ISIS_INTERFACE
+set protocols isis interface ge-0/0/0.0
+set protocols isis interface lo0.0 passive
+deactivate protocols isis
+set protocols ospf apply-groups OSPF_INTERFACE
+set protocols ospf area 0.0.1.244 interface ge-0/0/0.0
+set protocols ospf area 0.0.1.244 interface lo0.0 passive
+set protocols ldp apply-groups LDP_INTERFACE
+set protocols ldp interface ge-0/0/0.0
+set protocols ldp interface lo0.0
+set protocols ldp neighbor 162.249.33.3
+set protocols gvrp
+set protocols rstp disable
