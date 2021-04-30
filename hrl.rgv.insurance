@@ -73,3 +73,17 @@ set protocols ldp interface lo0.0
 set protocols ldp neighbor 162.249.33.3
 set protocols gvrp
 set protocols rstp disable
+
+##
+
+set policy-options policy-statement RGV-INSURANCE-EXPORT term connected from protocol direct
+set policy-options policy-statement RGV-INSURANCE-EXPORT term connected then next-hop self
+set policy-options policy-statement RGV-INSURANCE-EXPORT term connected then accept
+set policy-options policy-statement RGV-INSURANCE-EXPORT term static from protocol static
+set policy-options policy-statement RGV-INSURANCE-EXPORT term static then next-hop self
+set policy-options policy-statement RGV-INSURANCE-EXPORT term static then accept
+set policy-options policy-statement RGV-INSURANCE-EXPORT term ebgp from protocol bgp
+set policy-options policy-statement RGV-INSURANCE-EXPORT term ebgp from route-type external
+set policy-options policy-statement RGV-INSURANCE-EXPORT term ebgp then next-hop self
+set policy-options policy-statement RGV-INSURANCE-EXPORT term ebgp then accept
+set policy-options policy-statement RGV-INSURANCE-EXPORT term reject then reject
