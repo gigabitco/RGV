@@ -1,1 +1,373 @@
+## GIGABIT HQ ACX CONFIG FILE
+#
+set groups OSPF_INTERFACE protocols ospf traceoptions file ospf-debug
+set groups OSPF_INTERFACE protocols ospf traceoptions file size 1m
+set groups OSPF_INTERFACE protocols ospf traceoptions file files 10
+set groups OSPF_INTERFACE protocols ospf traceoptions flag state
+set groups OSPF_INTERFACE protocols ospf traceoptions flag error
+set groups OSPF_INTERFACE protocols ospf area <*> interface <*> interface-type p2p
+set groups ISIS_INTERFACE protocols isis traceoptions file isis-debug
+set groups ISIS_INTERFACE protocols isis traceoptions file size 1m
+set groups ISIS_INTERFACE protocols isis traceoptions file files 10
+set groups ISIS_INTERFACE protocols isis traceoptions flag state
+set groups ISIS_INTERFACE protocols isis traceoptions flag error
+set groups ISIS_INTERFACE protocols isis level 1 disable
+set groups ISIS_INTERFACE protocols isis interface <*> point-to-point
+set groups LDP_INTERFACE protocols ldp traceoptions file ldp-log
+set groups LDP_INTERFACE protocols ldp traceoptions file size 1m
+set groups LDP_INTERFACE protocols ldp traceoptions file files 10
+set groups LDP_INTERFACE protocols ldp traceoptions flag all
+set groups LDP_INTERFACE protocols ldp traceoptions flag error
+set groups LDP_INTERFACE protocols ldp traceoptions flag event
+set groups LDP_INTERFACE protocols ldp interface <*> allow-subnet-mismatch
+set groups DISABLE interfaces <*> disable
+set groups DISABLE interfaces <*> unit <*> disable
+set groups EDGE_PORT interfaces <*> flexible-vlan-tagging
+set groups EDGE_PORT interfaces <*> mtu 9192
+set groups EDGE_PORT interfaces <*> encapsulation flexible-ethernet-services
+set groups UNI_PORT interfaces <*> flexible-vlan-tagging
+set groups UNI_PORT interfaces <*> mtu 9192
+set groups UNI_PORT interfaces <*> encapsulation flexible-ethernet-services
+set groups NNI_PORT interfaces <*> flexible-vlan-tagging
+set groups NNI_PORT interfaces <*> mtu 9192
+set groups NNI_PORT interfaces <*> encapsulation flexible-ethernet-services
+set groups OSPFOVERLOAD protocols ospf area <*> interface <*> metric 65535
+set groups ISISOVERLOAD protocols isis overload advertise-high-metrics
+set system host-name HRLNTXHQ01R
+set system domain-name GIGABITCO.COM
+set system backup-router 192.168.100.1
+set system time-zone America/Chicago
+set system default-address-selection
+set system dump-on-panic
+set system authentication-order password
+set system location building "GIGABITCO HQ; 2815 S.77 Sunshine Strip Bldg #2"
+set system ports console insecure
+set system ports console type vt100
+set system root-authentication encrypted-password "$1$Q6JufODo$NLWH1s5gyZ8Y/EklNKXqv1"
+set system name-server 162.249.33.132
+set system login message "----------------------------------------------------------------------------------                                                                                                 \n            ,ad8888ba,  88                        88          88                              \n           d8\"'    `\"8b \"\"                        88          \"\"   ,d                         \n          d8'                                     88               88                               \n          88            88  ,adPPYb,d8 ,adPPYYba, 88,dPPYba,  88 MM88MMM          \n          88      88888 88 a8\"    `Y88 \"\"     `Y8 88P'    \"8a 88   88           \n          Y8,        88 88 8b       88 ,adPPPPP88 88       d8 88   88            \n           Y8a.    .a88 88 \"8a,   ,d88 88,    ,88 88b,   ,a8\" 88   88,         \n            `\"Y88888P\"  88  `\"YbbdP\"Y8 `\"8bbdP\"Y8 8Y\"Ybbd8\"'  88   \"Y888      \n                            aa,    ,88                                                                     \n                             \"Y8bbdP\"                                                                      \n----------------------------------------------------------------------------------\n               \n           GIGABIT COMMUNICATIONS - Unauthorized access is prohibited.\n           -----------------------------------------------------------"
+set system login user aochoa uid 2000
+set system login user aochoa class super-user
+set system login user aochoa authentication encrypted-password "$1$lKl8UxWJ$XOZKh0fsHV7GjnnE/UR6C."
+set system login user rancid uid 2004
+set system login user rancid class super-user
+set system login user rancid authentication encrypted-password "$1$y0zTDPM4$nzUYA9gSLUGwL5FSwHC950"
+set system login user wvelez uid 2001
+set system login user wvelez class super-user
+set system login user wvelez authentication encrypted-password "$1$gEfCIB5u$XySqov7BFq0lnhyfqpwba0"
+set system services ssh
+set system services telnet
+set system syslog user * any emergency
+set system syslog host 198.205.5.69 facility-override local6
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file messages archive size 5m
+set system syslog file messages archive files 10
+set system syslog file interactive-commands interactive-commands any
+set system syslog file interactive-commands archive size 100k
+set system syslog file interactive-commands archive files 1
+set system ddos-protection global disable-fpc
+set system ntp
+set chassis dump-on-panic
+set chassis alarm management-ethernet link-down ignore
+set chassis network-services ip
+set interfaces ct1-0/0/0 disable
+set interfaces ct1-0/0/1 disable
+set interfaces ct1-0/0/2 disable
+set interfaces ct1-0/0/3 disable
+set interfaces ct1-0/0/4 disable        
+set interfaces ct1-0/0/5 disable
+set interfaces ct1-0/0/6 disable
+set interfaces ct1-0/0/7 disable
+set interfaces ct1-0/0/8 disable
+set interfaces ct1-0/0/9 disable
+set interfaces ct1-0/0/10 disable
+set interfaces ct1-0/0/11 disable
+set interfaces ct1-0/0/12 disable
+set interfaces ct1-0/0/13 disable
+set interfaces ct1-0/0/14 disable
+set interfaces ct1-0/0/15 disable
+set interfaces ct1-0/0/16 disable
+set interfaces ge-0/1/0 description "CORE:HRLTXHQ01R:HRLNTXMT02R"
+set interfaces ge-0/1/0 flexible-vlan-tagging
+set interfaces ge-0/1/0 mtu 2000
+set interfaces ge-0/1/0 unit 1205 vlan-id 1205
+set interfaces ge-0/1/0 unit 1205 family inet address 162.249.33.81/31
+set interfaces ge-0/1/0 unit 1205 family mpls
+set interfaces lo0 description "RGV : GIGABIT HQ : JUNIPER ACX2000"
+set interfaces lo0 unit 0 family inet filter input protect-RE
+set interfaces lo0 unit 0 family inet address 127.0.0.1/32
+set interfaces lo0 unit 0 family inet address 162.249.33.22/32
+set snmp view block-oids oid .1.3.6.1.2.1.2.2.1.7.1 exclude
+set snmp view block-oids oid .1.3.6.1.2.1.2.2.1.7.13 exclude
+set snmp view block-oids oid .1.3.6.1.2.1.2.2.1.8.1 exclude
+set snmp view block-oids oid .1 include
+set snmp view jweb-view-all oid .1 include
+set snmp community "G1G@B3Tc0" authorization read-write
+set snmp community "G1G@B3Tc0" clients 162.249.33.139/32
+set snmp community "G1G@B3Tc0" clients 198.205.5.69/32
+set routing-options router-id 162.249.33.22
+set routing-options route-distinguisher-id 162.249.33.22
+set routing-options autonomous-system 62917
+set protocols mpls interface lo0.0
+set protocols mpls interface ge-0/1/0.1205
+set protocols bgp traceoptions file bgp-state
+set protocols bgp traceoptions file size 1m
+set protocols bgp traceoptions file files 10
+set protocols bgp traceoptions flag open
+set protocols bgp traceoptions flag state
+set protocols bgp group ibgpv4 type internal
+set protocols bgp group ibgpv4 description "iBGP connection to BackBone Routers"
+set protocols bgp group ibgpv4 local-address 162.249.33.22
+set protocols bgp group ibgpv4 family inet unicast
+set protocols bgp group ibgpv4 family inet-vpn unicast
+set protocols bgp group ibgpv4 family l2vpn signaling
+set protocols bgp group ibgpv4 export PE-EXPORT
+set protocols bgp group ibgpv4 peer-as 62917
+set protocols bgp group ibgpv4 neighbor 162.249.33.3 description HRLNTXMT01R
+set protocols ospf apply-groups OSPF_INTERFACE
+set protocols ospf area 0.0.1.244 interface lo0.0 passive
+set protocols ospf area 0.0.1.244 interface ge-0/1/0.1205
+set protocols ldp apply-groups LDP_INTERFACE
+set protocols ldp interface ge-0/1/0.1205
+set protocols ldp interface lo0.0
+set policy-options prefix-list BACKBONE 162.249.33.1/32
+set policy-options prefix-list BACKBONE 162.249.33.2/32
+set policy-options prefix-list BACKBONE 162.249.33.3/32
+set policy-options prefix-list BACKBONE 162.249.33.4/32
+set policy-options prefix-list BGP-ADDRESSES apply-path "protocols bgp group <*> neighbor <*>"
+set policy-options prefix-list DNS-SERVERS apply-path "system name-server <*>"
+set policy-options prefix-list L2CIRCUIT-NEIGHBORS apply-path "protocols l2circuit neighbor <*>"
+set policy-options prefix-list LOOPBACK0 apply-path "interfaces lo0 unit 0 family inet address <*>"
+set policy-options prefix-list MULTICAST-SUBNET 224.0.0.2/32
+set policy-options prefix-list NTP-ADDRESSES apply-path "system ntp server <*>"
+set policy-options prefix-list OSPF-MULTICAST 224.0.0.5/32
+set policy-options prefix-list OSPF-MULTICAST 224.0.0.6/32
+set policy-options prefix-list ROUTER-V4-ADDRESSES apply-path "interfaces <*> unit <*> family inet address <*>"
+set policy-options prefix-list ROUTER-V4-INTERCONNECTS apply-path "interfaces <[agxe][et]*> unit <*> family inet address <*/31>"
+set policy-options prefix-list SERVERFARM 162.249.33.128/27
+set policy-options prefix-list SERVERFARM 198.205.5.0/24
+set policy-options prefix-list SNMP-ADDRESSES apply-path "snmp community <*> clients <*>"
+set policy-options prefix-list UBIQUITI-ADDRESSES 10.15.0.0/24
+set policy-options prefix-list UBIQUITI-ADDRESSES 10.15.1.0/24
+set policy-options prefix-list SNMP-ALLOWED 162.249.33.130/32
+set policy-options prefix-list SNMP-ALLOWED 198.205.5.69/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.1/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.2/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.3/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.4/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.5/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.33.6/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.34.9/32
+set policy-options prefix-list LDP-ADDRESSES 162.249.34.11/32
+set policy-options policy-statement DEFAULT-ROUTE term l2vpn from protocol bgp
+set policy-options policy-statement DEFAULT-ROUTE term l2vpn from rib bgp.l2vpn.0
+set policy-options policy-statement DEFAULT-ROUTE term l2vpn then accept
+set policy-options policy-statement DEFAULT-ROUTE term l3vpn from protocol bgp
+set policy-options policy-statement DEFAULT-ROUTE term l3vpn from rib bgp.l3vpn.0
+set policy-options policy-statement DEFAULT-ROUTE term l3vpn then accept
+set policy-options policy-statement DEFAULT-ROUTE term default-route from protocol bgp
+set policy-options policy-statement DEFAULT-ROUTE term default-route from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement DEFAULT-ROUTE term default-route then next-hop self
+set policy-options policy-statement DEFAULT-ROUTE term default-route then accept
+set policy-options policy-statement DEFAULT-ROUTE term default-route-v6 from protocol bgp
+set policy-options policy-statement DEFAULT-ROUTE term default-route-v6 from route-filter ::/0 exact
+set policy-options policy-statement DEFAULT-ROUTE term default-route-v6 then next-hop self
+set policy-options policy-statement DEFAULT-ROUTE term default-route-v6 then accept
+set policy-options policy-statement DEFAULT-ROUTE term reject-all then reject
+set policy-options policy-statement LOAD-BALANCE then load-balance per-packet
+set policy-options policy-statement PE-EXPORT term block-rfc1918 from route-filter 10.0.0.0/8 orlonger
+set policy-options policy-statement PE-EXPORT term block-rfc1918 from route-filter 172.16.0.0/12 orlonger
+set policy-options policy-statement PE-EXPORT term block-rfc1918 from route-filter 192.168.0.0/16 orlonger
+set policy-options policy-statement PE-EXPORT term block-rfc1918 then reject
+set policy-options policy-statement PE-EXPORT term block-ipv6 from route-filter ::/96 exact
+set policy-options policy-statement PE-EXPORT term block-ipv6 from route-filter fd00::/8 orlonger
+set policy-options policy-statement PE-EXPORT term block-ipv6 from route-filter fc00::/7 orlonger
+set policy-options policy-statement PE-EXPORT term block-ipv6 then reject
+set policy-options policy-statement PE-EXPORT term l2vpn from protocol bgp
+set policy-options policy-statement PE-EXPORT term l2vpn from rib bgp.l2vpn.0
+set policy-options policy-statement PE-EXPORT term l2vpn then accept
+set policy-options policy-statement PE-EXPORT term l3vpn from protocol bgp
+set policy-options policy-statement PE-EXPORT term l3vpn from rib bgp.l3vpn.0
+set policy-options policy-statement PE-EXPORT term l3vpn then accept
+set policy-options policy-statement PE-EXPORT term connected from protocol direct
+set policy-options policy-statement PE-EXPORT term connected then community add COMMERCIAL
+set policy-options policy-statement PE-EXPORT term connected then next-hop self
+set policy-options policy-statement PE-EXPORT term connected then accept
+set policy-options policy-statement PE-EXPORT term static from protocol static
+set policy-options policy-statement PE-EXPORT term static then community add COMMERCIAL
+set policy-options policy-statement PE-EXPORT term static then next-hop self
+set policy-options policy-statement PE-EXPORT term static then accept
+deactivate policy-options policy-statement PE-EXPORT term static
+set policy-options policy-statement PE-EXPORT term default-route from protocol bgp
+set policy-options policy-statement PE-EXPORT term default-route from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement PE-EXPORT term default-route from route-type external
+set policy-options policy-statement PE-EXPORT term default-route then local-preference 90
+set policy-options policy-statement PE-EXPORT term default-route then next-hop self
+set policy-options policy-statement PE-EXPORT term default-route then accept
+set policy-options policy-statement PE-EXPORT term default-route-v6 from protocol bgp
+set policy-options policy-statement PE-EXPORT term default-route-v6 from route-filter ::/0 exact
+set policy-options policy-statement PE-EXPORT term default-route-v6 from route-type external
+set policy-options policy-statement PE-EXPORT term default-route-v6 then local-preference 90
+set policy-options policy-statement PE-EXPORT term default-route-v6 then next-hop self
+set policy-options policy-statement PE-EXPORT term default-route-v6 then accept
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v4 from protocol aggregate
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v4 from rib inet.0
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v4 then community add COMMERCIAL
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v4 then next-hop self
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v4 then accept
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v6 from protocol aggregate
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v6 from rib inet6.0
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v6 then community add COMMERCIAL
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v6 then next-hop self
+set policy-options policy-statement PE-EXPORT term aggregate-routes-v6 then accept
+set policy-options policy-statement PE-EXPORT term bgp-routes-v4 from protocol bgp
+set policy-options policy-statement PE-EXPORT term bgp-routes-v4 then next-hop self
+set policy-options policy-statement PE-EXPORT term bgp-routes-v4 then accept
+set policy-options policy-statement PE-EXPORT term bgp-routes-v6 from protocol bgp
+set policy-options policy-statement PE-EXPORT term bgp-routes-v6 then next-hop self
+set policy-options policy-statement PE-EXPORT term bgp-routes-v6 then accept
+set policy-options policy-statement PE-EXPORT term reject-all then reject
+set policy-options policy-statement PE-EXPORT term REJECT then reject
+set policy-options policy-statement REJECT-ALL term reject then reject
+set policy-options policy-statement ospf-default from protocol static
+set policy-options policy-statement ospf-default from route-filter 0.0.0.0/0 exact
+set policy-options policy-statement ospf-default then accept
+set policy-options community COMMERCIAL members 62917:3000
+set policy-options community CUSTOMER-OWNED-ROUTE members *:7000
+set policy-options community EXPORT members 62917:123
+set policy-options community GBX-INTERNAL-ONLY members 65000:0
+set policy-options community NOEXPORT members 62917:456
+set policy-options community PREF-120 members 62917:120
+set policy-options community PREF-50 members 62917:50
+set policy-options community PREF-80 members 62917:80
+set policy-options community PREF-HI members 62917:110
+set policy-options community PREF-LOW members 62917:90
+set policy-options community PREPEND-1 members 62917:1
+set policy-options community PREPEND-2 members 62917:2
+set policy-options community PREPEND-3 members 62917:3
+set policy-options community RTBH members 62917:666
+set firewall policer 15m if-exceeding bandwidth-limit 15m
+set firewall policer 15m if-exceeding burst-size-limit 1m
+set firewall policer 15m then discard
+set firewall policer 10m logical-interface-policer
+set firewall policer 10m if-exceeding bandwidth-limit 10m
+set firewall policer 10m if-exceeding burst-size-limit 1m
+set firewall policer 10m then discard
+set firewall policer 20m if-exceeding bandwidth-limit 20m
+set firewall policer 20m if-exceeding burst-size-limit 1m
+set firewall policer 20m then discard
+set firewall policer 14m if-exceeding bandwidth-limit 14m
+set firewall policer 14m if-exceeding burst-size-limit 1m
+set firewall policer 14m then discard   
+set firewall policer 3m if-exceeding bandwidth-limit 3m
+set firewall policer 3m if-exceeding burst-size-limit 1m
+set firewall policer 3m then discard
+set firewall policer 50m if-exceeding bandwidth-limit 50m
+set firewall policer 50m if-exceeding burst-size-limit 1m
+set firewall policer 50m then discard
+set firewall policer 40m if-exceeding bandwidth-limit 40m
+set firewall policer 40m if-exceeding burst-size-limit 1m
+set firewall policer 40m then discard
+set firewall policer 30m if-exceeding bandwidth-limit 30m
+set firewall policer 30m if-exceeding burst-size-limit 1m
+set firewall policer 30m then discard
+set firewall policer 5m if-exceeding bandwidth-limit 5m
+set firewall policer 5m if-exceeding burst-size-limit 1m
+set firewall policer 5m then discard
+set firewall policer 100m if-exceeding bandwidth-limit 100m
+set firewall policer 100m if-exceeding burst-size-limit 1m
+set firewall policer 100m then discard
+set firewall policer 25m if-exceeding bandwidth-limit 25m
+set firewall policer 25m if-exceeding burst-size-limit 1m
+set firewall policer 25m then discard
+set firewall policer Protect-RE-3m if-exceeding bandwidth-limit 3m
+set firewall policer Protect-RE-3m if-exceeding burst-size-limit 92k
+set firewall policer Protect-RE-3m then discard
+set firewall policer Protect-RE-1m if-exceeding bandwidth-limit 1m
+set firewall policer Protect-RE-1m if-exceeding burst-size-limit 92k
+set firewall policer Protect-RE-1m then discard
+set firewall policer PROTECT-5m if-exceeding bandwidth-limit 5m
+set firewall policer PROTECT-5m if-exceeding burst-size-limit 1m
+set firewall policer PROTECT-5m then discard
+set firewall filter protect-RE interface-specific
+set firewall filter protect-RE term ssh from source-address 162.249.33.128/27
+set firewall filter protect-RE term ssh from source-address 198.205.5.0/24
+set firewall filter protect-RE term ssh from destination-port ssh
+set firewall filter protect-RE term ssh from destination-port telnet
+set firewall filter protect-RE term ssh then accept
+set firewall filter protect-RE term SSH-DENY from destination-port ssh
+set firewall filter protect-RE term SSH-DENY from destination-port telnet
+set firewall filter protect-RE term SSH-DENY then discard
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.33.1/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.33.2/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.33.3/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.33.4/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 192.168.100.0/24
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.33.5/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.34.9/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.34.11/32
+set firewall filter protect-RE term LDP-ALLOWED from source-address 162.249.34.0/24
+set firewall filter protect-RE term LDP-ALLOWED from destination-address 224.0.0.2/32
+set firewall filter protect-RE term LDP-ALLOWED from destination-address 162.249.34.10/32
+set firewall filter protect-RE term LDP-ALLOWED from destination-address 162.249.34.11/32
+set firewall filter protect-RE term LDP-ALLOWED from destination-address 162.249.34.9/32
+set firewall filter protect-RE term LDP-ALLOWED from destination-address 162.249.34.0/24
+set firewall filter protect-RE term LDP-ALLOWED from protocol tcp
+set firewall filter protect-RE term LDP-ALLOWED from protocol udp
+set firewall filter protect-RE term LDP-ALLOWED from destination-port ldp
+set firewall filter protect-RE term LDP-ALLOWED then accept
+set firewall filter protect-RE term LDP-DENY from protocol tcp
+set firewall filter protect-RE term LDP-DENY from protocol udp
+set firewall filter protect-RE term LDP-DENY from destination-port ldp
+set firewall filter protect-RE term LDP-DENY then discard
+set firewall filter protect-RE term BGP from source-address 162.249.32.0/22
+set firewall filter protect-RE term BGP from destination-address 162.249.32.0/22
+set firewall filter protect-RE term BGP from protocol tcp
+set firewall filter protect-RE term BGP from destination-port bgp
+set firewall filter protect-RE term BGP then accept
+set firewall filter protect-RE term BGP-DENY from protocol tcp
+set firewall filter protect-RE term BGP-DENY from destination-port bgp
+set firewall filter protect-RE term BGP-DENY then discard
+set firewall filter protect-RE term SNMP-ALLOWED from source-address 162.249.33.128/27
+set firewall filter protect-RE term SNMP-ALLOWED from source-address 198.205.5.0/24
+set firewall filter protect-RE term SNMP-ALLOWED from destination-port snmp
+set firewall filter protect-RE term SNMP-ALLOWED from destination-port syslog
+set firewall filter protect-RE term SNMP-ALLOWED then accept
+set firewall filter protect-RE term SNMP-DENY from destination-port snmp
+set firewall filter protect-RE term SNMP-DENY from destination-port syslog
+set firewall filter protect-RE term SNMP-DENY then reject
+set firewall filter protect-RE term icmp from protocol icmp
+set firewall filter protect-RE term icmp from icmp-type echo-request
+set firewall filter protect-RE term icmp from icmp-type echo-reply
+set firewall filter protect-RE term icmp from icmp-type unreachable
+set firewall filter protect-RE term icmp from icmp-type time-exceeded
+set firewall filter protect-RE term icmp then accept
+set firewall filter protect-RE term RSVP from protocol tcp
+set firewall filter protect-RE term RSVP from protocol udp
+set firewall filter protect-RE term RSVP from port 3455
+set firewall filter protect-RE term RSVP then accept
+set firewall filter protect-RE term TCP-ESTABLISHED from tcp-flags "(ack | rst)"
+set firewall filter protect-RE term TCP-ESTABLISHED then accept
+set firewall filter protect-RE term OSPF from protocol ospf
+set firewall filter protect-RE term OSPF then accept
+set firewall filter protect-RE term VRRP from protocol vrrp
+set firewall filter protect-RE term VRRP then accept
+set firewall filter protect-RE term TRACEROUTE from protocol udp
+set firewall filter protect-RE term TRACEROUTE from destination-port 33434-33523
+set firewall filter protect-RE term TRACEROUTE then accept
+set firewall filter protect-RE term DOMAIN from protocol udp
+set firewall filter protect-RE term DOMAIN from port domain
+set firewall filter protect-RE term DOMAIN then accept
+set firewall filter protect-RE term OTHER then log
+set firewall filter protect-RE term OTHER then syslog
+set firewall filter protect-RE term OTHER then discard
+set firewall filter RFC-1918-Filter term drop from destination-address 0.0.0.0/8
+set firewall filter RFC-1918-Filter term drop from destination-address 10.0.0.0/8
+set firewall filter RFC-1918-Filter term drop from destination-address 172.16.0.0/12
+set firewall filter RFC-1918-Filter term drop from destination-address 192.168.0.0/16
+set firewall filter RFC-1918-Filter term drop from destination-address 169.254.0.0/16
+set firewall filter RFC-1918-Filter term drop from destination-address 224.0.0.0/4
+set firewall filter RFC-1918-Filter term drop then discard
+set firewall filter RFC-1918-Filter term allow then accept
 
